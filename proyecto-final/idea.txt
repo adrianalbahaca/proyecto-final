@@ -1,0 +1,15 @@
+Web app para registrar tus programas de entrenamiento:
+    - GUI intuitivo para anotar ejercicios a hacer cada día en cada semana, con reps y sets
+    - Sistema para registrar programas de otras partes en la web app
+    - Explicaciones de cada ejercicio a hacer, facilmente expandible
+    - Múltiples ramas: Weightlifting, Streetlifting, hipertrofía, cardio, endurance, HIIT, etc.
+    - Mantener seguimiento de los reps y sets que se hacen en el plan
+    - Hacer gráficas de progreso en cada plan
+
+Pasos a hacer:
+    - Diseño gráfico de la plataforma
+    - Estructura HTML y CSS
+    - Aprender JS para ver cómo usarlo adecuadamente
+    - Aplicar JS a efectos
+    - Usar Flask para hacer la app web
+    - Diseñar posible base de datos para usuario, planes y ejercicios

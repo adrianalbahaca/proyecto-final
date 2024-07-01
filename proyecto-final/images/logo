@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1">
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.34669;stroke-dasharray:none;stroke-opacity:1"
+       id="path1"
+       d="m 23.180459,17.007636 c -0.04607,-0.0798 -9.483413,16.266155 -9.39127,16.266155 0.09214,0 -9.3451974,-16.345954 -9.3912691,-16.266155 -0.046072,0.0798 18.8286101,0.0798 18.7825391,0 z"
+       transform="matrix(1.6982752,0,0,1.6982752,0.58216176,-10.250135)" />
+  </g>
+  <g
+     id="layer2"
+     transform="matrix(1.1775515,0,0,1.1775515,-4.261235,-8.1672387)">
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 10.205826,22.759727 6.772086,-1e-6 -6.522086,-6.522085 2e-6,6.522086 6.522084,-1e-6"
+       id="path7" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 37.544172,23.009728 -1e-6,-6.772086 -6.522085,6.522086 6.522086,-2e-6 -1e-6,-6.522084"
+       id="path7-6" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 37.794171,9.2080598 -6.772086,1e-6 6.522086,6.5220862 -2e-6,-6.5220872 -6.522084,1e-6"
+       id="path7-9" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 10.455826,8.9580614 10e-7,6.7720866 6.522085,-6.5220866 -6.522086,2e-6 10e-7,6.5220846"
+       id="path7-3" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3.6837397,22.759727 6.7720863,-13.5516636 2e-6,13.5516636 13.543445,23.458775 z"
+       id="path9" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="m 37.544172,22.759726 6.522086,-2e-6"
+       id="path12" />
+    <path
+       style="fill:#414770;stroke:#000000;stroke-width:0.5;stroke-dasharray:none;stroke-opacity:1"
+       d="M 37.544169,9.2080598 44.066258,22.759724 24.000624,46.218649 37.544172,22.759727 Z"
+       id="path13" />
+    <ellipse
+       style="fill:#414770;stroke:#000000;stroke-width:0.333442;stroke-dasharray:none;stroke-opacity:1"
+       id="path15"
+       cx="24.215782"
+       cy="15.634089"
+       rx="4.2804151"
+       ry="4.2673593" />
+  </g>
+</svg>
