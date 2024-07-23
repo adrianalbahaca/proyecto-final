@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/stuff.js"></script>
+</head>
+<body>
+    {% if not session[user_id] %}
+        <header class="homepage">
+            <div class="logo">
+                <img src="" alt="Logo">
+            </div>
+            <div class="register_buttons"></div>
+        </header>
+        {% else %}
+        <header class="user">
+            <div class="logo"></div>
+            <div class="user_pfp"></div>
+        </header>
+        {% endof if %}
+        <main>
+            {% block main%}
+            {% endblock %}
+        </main>
+        <footer>
+            <div class="logo">
+                <img src="" alt="Logo">
+            </div>
+            <div class="copyright">
+                <span>
+                    Copyright &#169; 2024 - Todos los derechos reservados
+                </span>
+            </div>
+        </footer>
+
+</body>
+</html>

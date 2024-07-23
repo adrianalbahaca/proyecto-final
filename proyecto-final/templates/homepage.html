@@ -1,0 +1,37 @@
+{% extends 'layout.html'%}
+
+{% block main %}
+
+<!-- This is where real shit git gud-->
+<section class="user">
+    <div class="user_pfp">
+
+    </div>
+    <div class="user_info">
+        <h3>{{user.name}}</h3>
+        <div class="progress">
+            {% for stat in stats%}
+                <div class="exercise">
+                    <h3>{{stat.name}}</h3>
+                    <p>{{stat.progress}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section class="routines">
+    {% for routines in routine %}
+        <div class="routine">
+            <h3>{{routine.name}}</h3>
+            <div>
+                <p>{{routine.time}}</p>
+                <p>{{routine.description}}</p>
+            </div>
+        </div>
+    {% endfor %}
+</section>
+<section class="graphs">
+
+</section>
+
+{% endblock %}
