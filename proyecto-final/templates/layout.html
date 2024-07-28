@@ -8,12 +8,21 @@
     <script src="/static/stuff.js"></script>
 </head>
 <body>
-    {% if not session[user_id] %}
+    {% if not session["user_id"] %}
         <header class="homepage">
             <div class="logo">
                 <img src="" alt="Logo">
             </div>
-            <div class="register_buttons"></div>
+            <div class="register_buttons">
+                <ul>
+                    <li>
+                        <a href="login.html" class="login_button">Log in</a>
+                    </li>
+                    <li>
+                        <a href="register.html" class="register_button">Register</a>
+                    </li>
+                </ul>
+            </div>
         </header>
         {% else %}
         <header class="user">
@@ -22,8 +31,7 @@
         </header>
         {% endof if %}
         <main>
-            {% block main%}
-            {% endblock %}
+            {% block main%}{% endblock %}
         </main>
         <footer>
             <div class="logo">
