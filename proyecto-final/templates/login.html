@@ -17,11 +17,16 @@
         <button type="submit">Register!</button>
     </form>
 </div>
+{% if warning %}
+<div class="warning">
+    {{ warning }}
+</div>
+{% endif %}
 <div class="suggestion">
     <h3>
         Don't have an account?
     </h3>
-    <a href="register.html">
+    <a href="/register">
         Register!
     </a>
 </div>
