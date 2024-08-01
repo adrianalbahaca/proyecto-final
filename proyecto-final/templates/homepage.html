@@ -9,24 +9,36 @@
 <section class="user">
     <div class="pfp">
         <!-- Find a way to use a picture saved on a database -->
+         {% if picture == None %}
+         <img src="/static/images/default-pfp.svg" alt="default-profile-picture" class="profile-picture">
+         {% else %}
+         <img src="{{picture}}" alt="profile-picture">
+         {% endif %}
     </div>
     <div class="info">
         <!-- User's name and progress on their goals -->
-        <h3>{{user.name}}</h3>
+        <h3>{{user.name}} {{user.last_name}}</h3>
         <div class="plus">
+            {% if progress == None %}
+            <h3>Looks like no PRs have been registered</h3>
+            {% else %}
+            <h3>You're getting closer!</h3>
             {% for exercise in progress %}
             <div class="exercise">
                 <h3>{{exercise.name}}</h3>
-                <p>{{exercise.scale}}</p>
+                <p>{{exercise.weight}} KG</p>
             </div>
             {% endfor %}
+            {% endif %}
         </div>
     </div>
 </section>
 <section class="routines">
     <div class="routine">
         <!-- TODO: Add the plus sign and see how it could be dinamically sized up -->
-         
+         <a href="/routine">
+            <img src="/static/images/plus-sign.svg" alt="">
+         </a>
     </div>
     <!-- Each routine added so far -->
      {% for routine in routines %}
@@ -41,6 +53,7 @@
 </section>
 <section class="graphs">
     <!-- Find out a way to place graphs dinamically depending on the goals of the person -->
+     <a href="/graphs">Check graphs of my progress</a>
 </section>
 
 {% endblock %}

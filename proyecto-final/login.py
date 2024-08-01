@@ -1,10 +1,17 @@
 from functools import wraps
-from flask import g, request, redirect, url_for
+from flask import redirect, session
 
 def login_required(f):
+    """
+    Decorate routes to require login.
+
+    https://flask.palletsprojects.com/en/latest/patterns/viewdecorators/
+    """
+
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if g.user is None:
-            return redirect(url_for('login', next=request.url))
+        if session.get("user_id") is None:
+            return redirect("/login")
         return f(*args, **kwargs)
+
     return decorated_function

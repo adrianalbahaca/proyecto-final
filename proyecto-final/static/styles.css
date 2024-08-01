@@ -5,3 +5,56 @@ body {
    font-size: 16px; 
 }
 
+header {
+   position: fixed top;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   padding: 0% 2%;
+}
+
+header, .homepage {
+   background-color: transparent;
+   color: #0C1D1D;
+}
+
+header, .user {
+   background-color: #0C1D1D;
+   color: white;
+}
+
+.register_buttons {
+
+}
+
+ul {
+   list-style-type: none;
+   display: grid;
+   grid-auto-flow: column;
+   column-gap: 1.25em;
+}
+
+a {
+   text-decoration: none;
+}
+
+li {
+   display: inline;
+}
+
+a, a:link, a:active {
+   text-decoration: none;
+   color: #0C1D1D;
+   font-weight: bolder;
+}
+
+a:hover {
+   text-decoration: underline;
+}
+
+a.register_button {
+   color: white;
+   background-color: #759FBC;
+   padding: 0.625em;
+}

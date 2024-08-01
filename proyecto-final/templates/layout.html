@@ -6,30 +6,31 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="/static/styles.css">
     <script src="/static/stuff.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-    {% if not session["user_id"] %}
+    {% if session["user_id"] %}
+        <header class="user">
+            <div class="logo"></div>
+            <div class="user_pfp"></div>
+        </header>
+    {% else %}
         <header class="homepage">
             <div class="logo">
                 <img src="" alt="Logo">
             </div>
             <div class="register_buttons">
-                <ul>
+                <ul class="buttons">
                     <li>
-                        <a href="login.html" class="login_button">Log in</a>
+                        <a href="/login" class="login_button">Log in</a>
                     </li>
                     <li>
-                        <a href="register.html" class="register_button">Register</a>
+                        <a href="/register" class="register_button">Register</a>
                     </li>
                 </ul>
             </div>
         </header>
-        {% else %}
-        <header class="user">
-            <div class="logo"></div>
-            <div class="user_pfp"></div>
-        </header>
-        {% endif%}
+    {% endif%}
         <main>
             {% block main%}{% endblock %}
         </main>
