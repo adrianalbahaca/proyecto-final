@@ -5,52 +5,24 @@
 {% endblock %}
     
 {% block main %}
-    <form action="post">
-        <div id="exercise" class="box">
-            <!-- This will be like some kind of table but 10x more customizable -->
-            <div class="header">
-                <!-- Header for name of the routine -->
-                 <h4>Name</h4>
-                 <input type="text" name="routine-name" id="">
-            </div>
-            <div class="header">
-                <!-- Header for description-->
-                 <h4>Description</h4>
-                 <input type="text" name="routine-desc" id="">
-            </div>
-            <div class="row">
-                <!-- Box for exercise with its sets-->
-                 <div class="box" id="exercise1">
-                    <div class="header">
-                        <h4>Exercise</h4>
-                        <input type="text" name="exercise-name" id="">
-                    </div>
-                    <div class="row">
-                        <p>Weight</p>
-                        <p>Reps</p>
-                    </div>
-                    <div class="row">
-                        <input type="text" name="exercise-weight" id="">
-                        <input type="text" name="exercise-reps" id="">
-                    </div>
-                    <div class="row">
-                        <button onclick="add_set()">
-                            Add set
-                        </button>
-                    </div>
-                 </div>
-            </div>
-            <div class="row">
-                <!-- Button to add another exercise -->
-                 <button onclick="add_exercise()">
-                    Add exercise
-                 </button>
+    <div>
+        <h3 onclick="addExercise()" id="add-exercise">Add Exercise</h3>
+    </div>
+    <form action="/routine" method="post" id="routine">
+        <input type="text" name="routine-name" id="">
+        <input type="text" name="routine-desc" id="">
+        <div class="exercise" id="exercise-1">
+            <input type="text" name="exercise-name-1" id="">
+            <div class="set" id="set-1">
+                <h3>Set 1</h3>
+                <input type="text" name="ex-1-set-1-reps" id="">
+                <input type="text" name="ex-1-set-1-weight" id="">
             </div>
         </div>
-        <div class="box">
-            <div class="row">
-                <button type="submit">Save</button>
-            </div>
+        <div class="add-set">
+            <h3 onclick="addSet(1, 1)" id="add-set-1">Add set</h3>
         </div>
+        <button type="submit">Save routine</button>
     </form>
+    <script src="/static/other-functions.js"></script>
 {% endblock %}

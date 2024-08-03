@@ -25,9 +25,8 @@ def after_request(response):
 db = SQL("sqlite:///fl.db")
 
 # My code
-@app.route("/")
+@app.route("/mainpage")
 def mainpage():
-    session.clear()
     return render_template("mainpage.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -94,7 +93,7 @@ def login():
         # Redirect to the homepage
         return redirect("/homepage")
 
-@app.route("/homepage")
+@app.route("/")
 @login_required
 def homepage():
     # Get shit from the database
@@ -106,9 +105,7 @@ def homepage():
     
     goals = db.execute("SELECT exercise, weight FROM goals WHERE user_id = ?", session['user_id'])
     
-    # Initialize progress
     progress = []
-
     # Assume that the prs recorded will always be in same quantity than the goals
     i = 0
     for goal in goals:
@@ -124,3 +121,21 @@ def homepage():
     routines = db.execute('SELECT routines.name, routines.description FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
 
     return render_template("homepage.html", progress=progress, routines=routines, picture=picture, user=user)
+
+@app.route("/routine", methods = ["GET", "POST"])
+@login_required
+def routine():
+    if request.method == "POST":
+        # TODO: Register the whole routine into the database
+        # routine is now a list of Tuples that can't be edited
+        routine = request.form
+
+        # We start off with the basics, getting the name and description of the routine
+        routine_name = routine.get('routine-name')
+        routine_desc = routine.get('routine-desc')
+
+        # Now, let's try to register each exercise
+    else:
+        # Show the page to register the routine
+        return render_template("routine.html")
+    

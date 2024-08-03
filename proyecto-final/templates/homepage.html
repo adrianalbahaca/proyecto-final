@@ -19,8 +19,8 @@
         <!-- User's name and progress on their goals -->
         <h3>{{user.name}} {{user.last_name}}</h3>
         <div class="plus">
-            {% if progress == None %}
-            <h3>Looks like no PRs have been registered</h3>
+            {% if not progress %}
+            <h3>Looks like no PRs have been registered yet...</h3>
             {% else %}
             <h3>You're getting closer!</h3>
             {% for exercise in progress %}
