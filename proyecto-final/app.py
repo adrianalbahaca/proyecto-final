@@ -125,17 +125,57 @@ def homepage():
 @app.route("/routine", methods = ["GET", "POST"])
 @login_required
 def routine():
-    if request.method == "POST":
-        # TODO: Register the whole routine into the database
-        # routine is now a list of Tuples that can't be edited
-        routine = request.form
+    if request.method == 'POST':
+        # TODO: Register the routine into the database and go back to the homepage
+        # Register name and description of the routine
+        routine = request.form.to_dict()
+        name = routine['routine-name']
+        desc = routine['routine-desc']
 
-        # We start off with the basics, getting the name and description of the routine
-        routine_name = routine.get('routine-name')
-        routine_desc = routine.get('routine-desc')
+        # Create routine id in database
+        db.execute('INSERT INTO ids (user_id) VALUES (?)', session['user_id'])
 
-        # Now, let's try to register each exercise
+        # Get routine id
+        id = db.execute('SELECT routine_id FROM ids WHERE user_id = ?', session['user_id'])[0]['routine_id']
+
+        # Save routine into database
+        db.execute('INSERT INTO routines (id, name, description) VALUES (?, ?, ?)', session['user_id'], name, desc)
+
+        # Now here comes the part where I need to think a lot...
+        # Scroll through the dict and save each part into the database, using a counter
+        # until it's the same to the length of the dict
+        ex_c = 1
+        
+        # Scroll through the routine dict until there are no more exercises to show
+        while True:
+            # Try to register a new exercise
+            try:
+                exercise = routine['ex-name-'+ str(ex_c)]
+            except:
+                # If you can't register another exercise, then break this loop
+                break
+            
+            set = 1
+            # If not, means that this exercise exists
+            for element in routine:
+                # Get reps and weight
+                try:
+                    reps = routine['ex-'+ str(ex_c) +'-set-'+ str(set) +'-reps']
+                    weight = routine['ex-'+ str(ex_c) +'-set-'+ str(set) +'-weight']
+                except:
+                    break   
+
+                # Register the variables into the database
+                db.execute('INSERT INTO routine_exercise (id, exercise, reps, weights) VALUES (?, ?, ?, ?)', id, exercise, reps, weight)
+
+                # Increase set counter
+                set += 1
+
+            # Increase exercise counter
+            ex_c += 1
+
+        # Once the whole dict is registered, return to the homepage
+        return redirect('/')
+
     else:
-        # Show the page to register the routine
-        return render_template("routine.html")
-    
+        return render_template('routine.html')

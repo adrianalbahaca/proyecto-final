@@ -5,24 +5,29 @@
 {% endblock %}
     
 {% block main %}
-    <div>
-        <h3 onclick="addExercise()" id="add-exercise">Add Exercise</h3>
-    </div>
     <form action="/routine" method="post" id="routine">
-        <input type="text" name="routine-name" id="">
-        <input type="text" name="routine-desc" id="">
-        <div class="exercise" id="exercise-1">
-            <input type="text" name="exercise-name-1" id="">
-            <div class="set" id="set-1">
+        <!-- Routine -->
+        <input type="text" name="routine-name" placeholder="Routine's name">
+        <input type="text" name="routine-desc" placeholder="Routine's description">
+        <button type="submit">Save routine</button>
+        <h4 onclick="addExercise()" class="add-button">Add Exercise</h4>
+        <!-- Exercises -->
+        <div class="exercise" id="ex-1">
+            <!-- Buttons -->
+            <h4 onclick="removeExercise(1)" class="remove-button">Remove exercise</h4>
+            <!-- Title -->
+            <input type="text" name="ex-name-1" placeholder="Exercises name">
+            <h4 onclick="addSet(1, 1)" id="add-set-ex-1" class="add-button">Add set</h4>
+            <!-- Sets -->
+            <div class="set" id="ex-1-set-1">
+                <!-- Buttons -->
+                <h4 onclick="removeSet(1, 1)" class="remove-button">Remove set</h4>
                 <h3>Set 1</h3>
-                <input type="text" name="ex-1-set-1-reps" id="">
-                <input type="text" name="ex-1-set-1-weight" id="">
+                <!-- Reps & Weights -->
+                <input type="text" name="ex-1-set-1-reps" placeholder="Reps">
+                <input type="text" name="ex-1-set-1-weight" placeholder="Weight">
             </div>
         </div>
-        <div class="add-set">
-            <h3 onclick="addSet(1, 1)" id="add-set-1">Add set</h3>
-        </div>
-        <button type="submit">Save routine</button>
     </form>
     <script src="/static/other-functions.js"></script>
 {% endblock %}
