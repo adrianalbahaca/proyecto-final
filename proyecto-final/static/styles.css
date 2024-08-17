@@ -24,10 +24,6 @@ header, .user {
    color: white;
 }
 
-.register_buttons {
-
-}
-
 ul {
    list-style-type: none;
    display: grid;
@@ -57,4 +53,14 @@ a.register_button {
    color: white;
    background-color: #759FBC;
    padding: 0.625em;
+}
+
+/* Footer for every page */
+footer {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   position: fixed;
+   bottom: 0;
 }

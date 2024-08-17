@@ -10,8 +10,20 @@
 <body>
     {% if session["user_id"] %}
         <header class="user">
-            <div class="logo"></div>
-            <div class="user_pfp"></div>
+            <div class="logo">
+                <img src="/static/images/dibujo.svg" alt="">
+            </div>
+            <div class="user_pfp">
+                {% if user.pfp %}
+                <a href="/settings">
+                    <img src="{{ user.pfp }}" alt="">
+                </a>
+                {% else %}
+                <a href="/settings">
+                    <img src="/static/images/default-pfp.svg" alt="">
+                </a>
+                {% endif %}
+            </div>
         </header>
     {% else %}
         <header class="homepage">

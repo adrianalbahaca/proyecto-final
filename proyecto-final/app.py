@@ -3,9 +3,16 @@ from flask_session import Session
 from cs50 import SQL
 from werkzeug.security import check_password_hash, generate_password_hash
 from login import login_required
+from werkzeug.utils import secure_filename
+import os
+
+# Initialize the reception of files
+UPLOAD_FOLDER = '/static/images/pfps'
+ALLOWED_EXTENSIONS = {'png', 'jpeg', 'jpg'}
 
 # Initialize Flask app
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize sessions so as to use filesystems
 app.config["SESSION PERMANENT"] = False
@@ -91,7 +98,7 @@ def login():
         session['user_id'] = rows[0]['id']
         
         # Redirect to the homepage
-        return redirect("/homepage")
+        return redirect("/")
 
 @app.route("/")
 @login_required
@@ -115,7 +122,7 @@ def homepage():
     
 
     # Get the user's data
-    user = db.execute("SELECT name, last_name FROM users WHERE id = ?", session['user_id'])[0]
+    user = db.execute("SELECT name FROM users WHERE id = ?", session['user_id'])[0]
 
     # Get routines class="register_button"
     routines = db.execute('SELECT routines.name, routines.description FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
@@ -137,9 +144,10 @@ def routine():
 
         # Get routine id
         id = db.execute('SELECT routine_id FROM ids WHERE user_id = ?', session['user_id'])[0]['routine_id']
+        print(id)
 
         # Save routine into database
-        db.execute('INSERT INTO routines (id, name, description) VALUES (?, ?, ?)', session['user_id'], name, desc)
+        db.execute('INSERT INTO routines (id, name, description) VALUES (?, ?, ?)', id, name, desc)
 
         # Now here comes the part where I need to think a lot...
         # Scroll through the dict and save each part into the database, using a counter
@@ -178,4 +186,62 @@ def routine():
         return redirect('/')
 
     else:
-        return render_template('routine.html')
+        user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
+        return render_template('routine.html', user=user)
+    
+@app.route('/settings')
+@login_required
+def settings():
+    user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
+    print(user)
+    return render_template('settings.html', user=user)
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/profile', methods = ["GET", "POST"])
+@login_required
+def profile():
+    if request.method == 'GET':
+        # Return the page to edit the profile picture (and probably some more data)
+        user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
+        return render_template('profile.html', user=user)
+    else:
+        # TODO: Receive the info given and update everything on the database
+        # Receive each piece of information
+        name = request.form.get('new_name')
+        username = request.form.get('new_username')
+        pfp = request.files['pfp']
+
+        # Start to save each thing up depending on what the person uploads
+        if name:
+            db.execute('UPDATE users SET name = ? WHERE id = ?', name, session['user_id'])
+        
+        if username:
+            # Check if the username is in the database
+            rows = db.execute('SELECT username FROM users WHERE username = ?', username)
+
+            if len(rows) == 0:
+                # If the length is equal to zero, it means that no one is using that username
+                try:
+                    db.execute('UPDATE users SET username = ? WHERE id = ?', username, session['user_id'])
+                except:
+                    flash('There was an issue while uploading your profile pic. Try again')
+                    return redirect('/profile')
+            else:
+                # Else, the username is taken
+                flash('The username is already taken. Try another one')
+                return redirect('/profile')
+        
+        # Now for the pfp part (first time doing this Scheiße)
+        if pfp:
+            if allowed_file(pfp.filename):
+                pfpname = secure_filename(pfp)
+                pfp.save(os.path.join(app.config['UPLOAD_FOLDER'], pfpname))
+
+                # Save filename into the database
+                db.execute('UPDATE users SET pfp = ? WHERE id = ?', pfpname, session['user_id'])
+        
+        # Finally, returning to the settings page
+        return redirect('/settings')
