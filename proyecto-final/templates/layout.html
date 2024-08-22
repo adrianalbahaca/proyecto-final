@@ -14,9 +14,9 @@
                 <img src="/static/images/dibujo.svg" alt="">
             </div>
             <div class="user_pfp">
-                {% if user.pfp %}
+                {% if picture != None %}
                 <a href="/settings">
-                    <img src="{{ user.pfp }}" alt="">
+                    <img src="{{ picture }}" alt="">
                 </a>
                 {% else %}
                 <a href="/settings">
@@ -24,6 +24,11 @@
                 </a>
                 {% endif %}
             </div>
+            {% if get_flashed_messages()%}
+            <div class="messages">
+                {{ get_flashed_messages() }}
+            </div>
+            {% endif %}
         </header>
     {% else %}
         <header class="homepage">

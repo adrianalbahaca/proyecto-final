@@ -7,7 +7,7 @@ from werkzeug.utils import secure_filename
 import os
 
 # Initialize the reception of files
-UPLOAD_FOLDER = '/static/images/pfps'
+UPLOAD_FOLDER = 'static/images/pfps'
 ALLOWED_EXTENSIONS = {'png', 'jpeg', 'jpg'}
 
 # Initialize Flask app
@@ -97,16 +97,26 @@ def login():
         # Remember which user has logged in
         session['user_id'] = rows[0]['id']
         
+        flash('Successfully logged in!')
+
         # Redirect to the homepage
         return redirect("/")
+    
+# Define function to return the most important data from the user
+def get_user_data():
+    user = dict()
+    pfp = db.execute('SELECT pfp FROM users WHERE id = ?', session['user_id'])[0]['pfp']
+    if not pfp == 'NULL':
+        user['picture'] = None
+    else:
+        user['picture'] = UPLOAD_FOLDER + '/' + pfp
+    user['name'] = db.execute("SELECT name FROM users WHERE id = ?", session['user_id'])[0]
+    return user
 
 @app.route("/")
 @login_required
 def homepage():
     # Get shit from the database
-    # Get the pfp address from the database
-    picture = db.execute('SELECT pfp FROM users WHERE id = ?', session['user_id'])[0]['pfp']
-
     # Compare the current weight with your goals
     prs = db.execute("SELECT exercise, weight FROM prs WHERE user_id = ?", session['user_id'])
     
@@ -118,16 +128,15 @@ def homepage():
     for goal in goals:
         weight = prs[i]['weight']
         progress.append({'exercise':goal['exercise'], 'diff': goal['weight'] - weight['weight']})
-        i += 1        
-    
-
-    # Get the user's data
-    user = db.execute("SELECT name FROM users WHERE id = ?", session['user_id'])[0]
+        i += 1
 
     # Get routines class="register_button"
     routines = db.execute('SELECT routines.name, routines.description FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
 
-    return render_template("homepage.html", progress=progress, routines=routines, picture=picture, user=user)
+    # Get the user's name and picture
+    user = get_user_data()
+
+    return render_template("homepage.html", progress=progress, routines=routines, picture=user['picture'], user=user['name'])
 
 @app.route("/routine", methods = ["GET", "POST"])
 @login_required
@@ -186,15 +195,14 @@ def routine():
         return redirect('/')
 
     else:
-        user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
-        return render_template('routine.html', user=user)
+        user = get_user_data()
+        return render_template('routine.html', user=user['name'], picture=user['picture'])
     
 @app.route('/settings')
 @login_required
 def settings():
-    user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
-    print(user)
-    return render_template('settings.html', user=user)
+    user = get_user_data()
+    return render_template('settings.html', user=user['name'], picture=user['picture'])
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -204,20 +212,18 @@ def allowed_file(filename):
 @login_required
 def profile():
     if request.method == 'GET':
-        # Return the page to edit the profile picture (and probably some more data)
-        user = db.execute('SELECT * FROM users WHERE id = ?', session['user_id'])[0]
-        return render_template('profile.html', user=user)
+        # Return the page to edit the profile picture
+        user = get_user_data()
+        return render_template('profile.html', user=user['name'], picture=user['picture'])
     else:
         # TODO: Receive the info given and update everything on the database
-        # Receive each piece of information
-        name = request.form.get('new_name')
-        username = request.form.get('new_username')
-        pfp = request.files['pfp']
 
         # Start to save each thing up depending on what the person uploads
+        name = request.form.get('new_name')
         if name:
             db.execute('UPDATE users SET name = ? WHERE id = ?', name, session['user_id'])
-        
+
+        username = request.form.get('new_username')
         if username:
             # Check if the username is in the database
             rows = db.execute('SELECT username FROM users WHERE username = ?', username)
@@ -235,13 +241,123 @@ def profile():
                 return redirect('/profile')
         
         # Now for the pfp part (first time doing this Scheiße)
-        if pfp:
-            if allowed_file(pfp.filename):
-                pfpname = secure_filename(pfp)
-                pfp.save(os.path.join(app.config['UPLOAD_FOLDER'], pfpname))
-
-                # Save filename into the database
-                db.execute('UPDATE users SET pfp = ? WHERE id = ?', pfpname, session['user_id'])
+        if 'pfp' not in request.files:
+            flash('No file part')
+            return redirect('/profile')
         
+        pfp = request.files['pfp']
+
+        if pfp.filename == '':
+            flash('No selected file')
+            return redirect('/profile')
+        
+        if pfp and allowed_file(pfp.filename):
+            pfp_name = secure_filename(pfp.filename)
+            print(pfp_name)
+            pfp.save(os.path.join(app.config['UPLOAD_FOLDER'], pfp_name))
+
+            # Save to database
+            db.execute('UPDATE users SET pfp = ? WHERE id = ?', pfp_name, session['user_id'])
+
         # Finally, returning to the settings page
         return redirect('/settings')
+
+@app.route('/prs', methods = ['GET', 'POST'])
+@login_required
+def prs():
+    if request.method == 'GET':
+        # Return the page to edit the profile picture
+        user = get_user_data()
+        return render_template('prs.html', user=user['name'], picture=user['picture'])
+    else:
+        # TODO: Manage the PRs and save them into the database
+        prs = request.form.to_dict()
+
+        # Create some kind of loop that saves each exercise's name and weight into the database
+        counter = 1
+        while True:
+            # Start by trying to register a new exercise
+            try:
+                pr_name = prs['ex-name-' + str(counter)]
+                pr_weight = prs['ex-weight-' + str(counter)]
+            except:
+                # If it fails, then there's nothing else to register, so break the loop
+                break
+
+            # Save the name and weight into the database
+            db.execute('INSERT INTO prs (user_id, exercise, weight) VALUES (?, ?, ?)', session['user_id'] , pr_name, pr_weight)
+
+            # Increase counter by 1
+            counter += 1
+        flash('PRs successfully registered')
+        return redirect('/settings')
+    
+@app.route("/password", methods = ['GET', 'POST'])
+@login_required
+def password():
+    if request.method == 'GET':
+        user = get_user_data()
+        return render_template('password.html', user=user['name'], picture=user['picture'])
+    else:
+        # TODO: Change the password of the user
+        old = request.form.get('old-password')
+        new_1 = request.form.get('new-password-1')
+        new_2 = request.form.get('new-password-2')
+
+        # Check if the old password typed is the correct one
+        if not check_password_hash(db.execute('SELECT hash FROM users WHERE id = ?', session['user_id'])[0]['hash'], old):
+            flash('Incorrect password. Try again')
+            return redirect('/password')
+        
+        # Check if the new passwords match
+        if new_1 != new_2:
+            flash("The new passwords don't match. Try again")
+            return redirect('/password')
+        
+        # If everything is alright, then add the new password into the database
+        hash = generate_password_hash(old)
+        db.execute('UPDATE users SET hash = ? WHERE id = ?', hash, session['user_id'])
+
+        flash('Password successfully changed')
+        return redirect("/settings")
+
+@app.route('/delete', methods = ['GET', 'POST'])
+@login_required
+def delete():
+    if request.method == 'GET':
+        user = get_user_data()
+        return render_template('delete.html', user=user['name'], picture=user['picture'])
+    else:
+        # TODO: Delete the account and all of the info involved with it
+
+        # Delete picture from the server
+        picture = db.execute('SELECT pfp FROM users WHERE id = ?', session['user_id'])[0]['pfp']
+        print(picture)
+        if picture != None:
+            file_path = UPLOAD_FOLDER + '/' + picture
+            try:
+                os.remove(file_path)
+            except:
+                flash('Something went wrong when trying to delete the profile picture')
+                return redirect('/settings')
+            
+        print(session['user_id'])
+        
+        # Delete stuff from the 'routines' tables
+        db.execute('DELETE FROM routines WHERE id = ?', session['user_id'])
+        db.execute('DELETE FROM routine_exercise WHERE id = ?', session['user_id'])
+
+        # Delete stuff from the 'ids' table
+        db.execute('DELETE FROM ids WHERE user_id = ?', session['user_id'])
+
+        # Delete stuff from the 'goals' and 'prs' tables
+        db.execute('DELETE FROM goals WHERE user_id = ?', session['user_id'])
+        db.execute('DELETE FROM prs WHERE user_id = ?', session['user_id'])
+
+        # Delete info from the 'users' table
+        db.execute('DELETE FROM users WHERE id = ?', session['user_id'])
+
+        # Finally, close session
+        session.clear()
+
+        return redirect('/register')

@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Delete account!
+{% endblock %}
+
+{% block main %}
+    <div class="box">
+        <div class="column">
+            <h4>
+                Are you sure you wanna delete your account?
+                This means that you will lose all your registered PRs, routines and information
+                and won't be recoverable
+            </h4>
+            <form action="/delete" method="post">
+                <button>
+                    I understand. Delete my account
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -61,3 +61,31 @@ function removeExercise(currentEx) {
     // Reduce exercise counter
     exercise--;
 }
+
+// PR Shit
+
+pr = 1;
+
+function addPR() {
+    // TODO: Add PR to the form
+    // Add the new PR to the form
+    document.getElementById('prs').insertAdjacentHTML('beforeend', '<div class="row" id="pr-' + pr + '">'
+        + '<input type="text" name="ex-name-' + pr + '" id="">'
+        + '<input type="text" name="ex-weight-'+ pr +'" id="">'
+        + '<!-- Button to remove this pr -->'
+        + '<h4 onclick="removePR('+ pr +')">-</h4>'
+        + '</div>'
+    )
+
+    // Add 1 to the PR counter
+    pr ++;
+}
+
+function removePR(currentPR) {
+    // TODO: Remove PR of the form. Input being the PR to remove
+    
+    section = document.getElementById('pr-' + currentPR)
+    section.remove()
+
+    pr--;
+}
