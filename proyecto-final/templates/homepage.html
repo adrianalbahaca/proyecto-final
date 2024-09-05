@@ -6,8 +6,8 @@
 
 {% block main %}
 <!-- This is where real shit git gud-->
-<section class="user">
-    <div class="pfp">
+<section class="box">
+    <div class="column">
         <!-- Find a way to use a picture saved on a database -->
          {% if picture == None %}
          <img src="/static/images/default-pfp.svg" alt="default-profile-picture" class="profile-picture">
@@ -15,14 +15,14 @@
          <img src="{{picture}}" alt="profile-picture">
          {% endif %}
     </div>
-    <div class="info">
+    <div class="column">
         <!-- User's name and progress on their goals -->
         <h3>{{user.name}}</h3>
         <div class="plus">
             {% if not progress %}
             <h3>Looks like no PRs have been registered yet...</h3>
             {% else %}
-            <h3>You're getting closer!</h3>
+            <h3>Look at how much you're progressing!</h3>
             {% for exercise in progress %}
             <div class="exercise">
                 <h3>{{exercise.name}}</h3>
@@ -33,25 +33,30 @@
         </div>
     </div>
 </section>
-<section class="routines">
-    <div class="routine">
-        <!-- TODO: Add the plus sign and see how it could be dinamically sized up -->
-         <a href="/routine">
-            <img src="/static/images/plus-sign.svg" alt="">
-         </a>
-    </div>
-    <!-- Each routine added so far -->
-     {% for routine in routines %}
-     <div class="routine">
-        <h3>{{routine.name}}</h3>
-        <div class="info">
-            <p>{{routine.time}}</p>
-            <p>{{routine.description}}</p>
-        </div>
+<section class="box">
+    <!-- Add routines made and the plus sign to add a routine -->
+     <div class="row">
+        Routines
      </div>
-     {% endfor %}
+     <div class="row">
+        <a href="/routine">
+            <img src="/static/images/plus-sign.svg" alt="">
+        </a>
+        {% for routine in routines %}
+        <a href="/look_routine">
+            <div class="column">
+                <h5>
+                    {{ routine.routine-name }}
+                </h5>
+                <p>
+                    {{ routine.routine-desc }}
+                </p>
+            </div>
+        </a>
+        {% endfor %}
+     </div>
 </section>
-<section class="graphs">
+<section class="box">
     <!-- Find out a way to place graphs dinamically depending on the goals of the person -->
      <a href="/graphs">Check graphs of my progress</a>
 </section>
