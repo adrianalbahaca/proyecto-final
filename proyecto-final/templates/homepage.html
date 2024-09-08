@@ -6,59 +6,69 @@
 
 {% block main %}
 <!-- This is where real shit git gud-->
-<section class="box">
-    <div class="column">
-        <!-- Find a way to use a picture saved on a database -->
-         {% if picture == None %}
-         <img src="/static/images/default-pfp.svg" alt="default-profile-picture" class="profile-picture">
-         {% else %}
-         <img src="{{picture}}" alt="profile-picture">
-         {% endif %}
-    </div>
-    <div class="column">
-        <!-- User's name and progress on their goals -->
-        <h3>{{user.name}}</h3>
-        <div class="plus">
-            {% if not progress %}
-            <h3>Looks like no PRs have been registered yet...</h3>
-            {% else %}
-            <h3>Look at how much you're progressing!</h3>
-            {% for exercise in progress %}
-            <div class="exercise">
-                <h3>{{exercise.name}}</h3>
-                <p>{{exercise.weight}} KG</p>
-            </div>
+<section class="container">
+    <div class="row row-cols-1 row-cols-md-2 g-3 border-bottom pb-3 mb-2">
+        <div class="col text-center">
+            <a href="/settings">
+                {% if picture == None %}
+                <img src="/static/images/default-pfp.svg" alt="" class="profile-pic">
+                {% else %}
+                <img src="{{ picture }}" alt="" class="profile-pic rounded-circle">
+                {% endif %}   
+            </a>
+        </div>
+        <div class="col bg-warning-subtle rounded py-2 ps-4 d-flex flex-column justify-content-center">
+            <h3>{{ user.name }}</h3>
+            {% if progress %}
+            {% for stuff in progress %}
+                <div class="row row-cols-2">
+                    <div>
+                        <h3>{{ stuff.exercise }}</h3>
+                    </div>
+                    <div>
+                        <p>{{ stuff.diff }}</p>
+                    </div>
+                </div>
             {% endfor %}
+            {% else %}
+            <p>Seems like you don't have anything registered...</p>
             {% endif %}
         </div>
     </div>
 </section>
-<section class="box">
-    <!-- Add routines made and the plus sign to add a routine -->
-     <div class="row">
-        Routines
-     </div>
-     <div class="row">
-        <a href="/routine">
-            <img src="/static/images/plus-sign.svg" alt="">
-        </a>
-        {% for routine in routines %}
-        <a href="/look_routine">
-            <div class="column">
-                <h5>
-                    {{ routine.routine-name }}
-                </h5>
-                <p>
-                    {{ routine.routine-desc }}
-                </p>
+<section class="container">
+    <!-- Add each routine made on this section -->
+    {% if not routines %}
+        <div class="border-bottom mb-3 pb-3 row row-cols-1 row-cols-md-2">
+            <div class="col">
+                <h3>Seems like you don't have any registered routines... let's register one!</h3>
             </div>
-        </a>
+            <div class="col d-flex justify-content-center align-items-center border rounded">
+                <a href="/routine">
+                    <img src="/static/images/plus-sign.svg" alt="" class="sign">
+                </a>
+            </div>
+        </div>
+    {% else %}
+        {% for routine in routines %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for routine in routines %}
+            <div class="col border rounded">
+                <h3>{{ routine.name }}</h3>
+                <p>{{ routine.desc }}</p>
+            </div>
+            {% endfor %}
+        </div>
         {% endfor %}
-     </div>
+        <div class="col border rounded">
+            <img src="/static/images/plus-sign.svg" alt="" class="sign">
+        </div>
+    {% endif %}
 </section>
-<section class="box">
+<section class="container text-center">
     <!-- Find out a way to place graphs dinamically depending on the goals of the person -->
-     <a href="/graphs">Check graphs of my progress</a>
+    <h3>Let's see your progress in the graphs</h3>
+     <a href="/graphs" class="btn btn-outline-info">Check graphs of my progress</a>
 </section>
 
 {% endblock %}

@@ -5,3 +5,31 @@
    height: 33.19px;
    width: 36px;
 }
+.example-page {
+   height: 100%;
+   width: 500px;
+}
+
+.half-bg {
+   background-color: #0C1D1D;
+}
+
+.graph {
+   height: 100%;
+   width: 350px;
+}
+
+.profile-pic {
+   height: 150px;
+   width: 150px;
+}
+
+.sign {
+   height: 50px;
+   width: 50px;
+}
+
+.big-profile-pic {
+   height: 200px;
+   width: 200px;
+}

@@ -5,29 +5,32 @@
 {% endblock %}
     
 {% block main %}
+<div class="container">
     <form action="/routine" method="post" id="routine">
         <!-- Routine -->
-        <input type="text" name="routine-name" placeholder="Routine's name">
-        <input type="text" name="routine-desc" placeholder="Routine's description">
-        <button type="submit">Save routine</button>
-        <h4 onclick="addExercise()" class="add-button">Add Exercise</h4>
-        <!-- Exercises -->
-        <div class="exercise" id="ex-1">
-            <!-- Buttons -->
-            <h4 onclick="removeExercise(1)" class="remove-button">Remove exercise</h4>
-            <!-- Title -->
-            <input type="text" name="ex-name-1" placeholder="Exercises name">
-            <h4 onclick="addSet(1, 1)" id="add-set-ex-1" class="add-button">Add set</h4>
-            <!-- Sets -->
-            <div class="set" id="ex-1-set-1">
-                <!-- Buttons -->
-                <h4 onclick="removeSet(1, 1)" class="remove-button">Remove set</h4>
-                <h3>Set 1</h3>
-                <!-- Reps & Weights -->
-                <input type="text" name="ex-1-set-1-reps" placeholder="Reps">
-                <input type="text" name="ex-1-set-1-weight" placeholder="Weight">
+         <div class="row mb-3 border-bottom">
+            <div class="col">
+                <h3>Routine name</h3>
             </div>
+            <div class="col">
+                <input type="text" autocomplete="off" autofocus name="routine-name" class="form-control">
+            </div>
+         </div>
+         <div class="row mb-3 border-bottom">
+            <div class="col">
+                <h3>Routine description</h3>
+            </div>
+            <div class="col">
+                <input type="text" autocomplete="off" autofocus name="routine-desc" class="form-control">
+            </div>
+         </div>
+         <div class="row mb-2 d-flex flex-row align-items-center">
+            <button type="submit" class="btn btn-outline-success">Save routine</button>
+         </div>
+        <div>
+            
         </div>
     </form>
+</div>
     <script src="/static/other-functions.js"></script>
 {% endblock %}

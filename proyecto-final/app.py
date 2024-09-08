@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 import os
 
 # Initialize the reception of files
-UPLOAD_FOLDER = 'static/images/pfps'
-ALLOWED_EXTENSIONS = {'png', 'jpeg', 'jpg'}
+UPLOAD_FOLDER = 'static/images/pfps/'
+ALLOWED_EXTENSIONS = {'.png', '.jpeg', '.jpg'}
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -38,32 +38,32 @@ def register():
         # Get all of the variables needed
         username = request.form.get('username')
         name = request.form.get('name')
-        last_name = request.form.get('last-name')
         password_1 = request.form.get('password-1')
         password_2 = request.form.get('password-2')
 
         # Check if any of the variables are mission
-        if not username or not password_1 or not password_2 or not name or not last_name:
-            warning = "Missing passwords, full name and/or email. Try again"
-            return render_template("register.html", warning=warning)
+        if not username or not password_1 or not password_2 or not name:
+            flash("Missing passwords, full name and/or email. Try again")
+            return redirect('/register')
         
         # Check if the passwords match
         if password_1 != password_2:
-            warning = "Passwords don't match"
-            return render_template("register.html", warning=warning)
+            flash("Passwords don't match")
+            return redirect('/register')
         
         # Try to insert the username, email and passwords into the database
         try:
-            db.execute("INSERT INTO users (username, name, last_name, hash) VALUES (?, ?, ?, ?)", username, name, last_name, generate_password_hash(password_1))
+            db.execute("INSERT INTO users (username, name, hash) VALUES (?, ?, ?)", username, name, generate_password_hash(password_1))
         except:
             # If something goes wrong, means that the username has been taken
-            warning = "Username already in use. Try another one"
-            return render_template("register.html", warning=warning)
+            flash('Username already taken. Try another one')
+            return redirect('/register')
         
         # Save session
         session['user_id'] = db.execute("SELECT id FROM users WHERE username = ?", username)[0]['id']
         
-        return redirect("/homepage")
+        flash('Successfully registered')
+        return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -77,16 +77,16 @@ def login():
 
         # Check if the user typed these two
         if not username or not password:
-            warning = "Username and/or password not typed"
-            return render_template("login.html", warning=warning)
+            flash('Username and/or password not typed in')
+            return redirect('/login')
         
         # Take out rows from the database
         rows = db.execute("SELECT * FROM users WHERE username = ?", username)
 
         # Check if the username exists and the password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], password):
-            warning = "Invalid username and/or password. Try again"
-            return render_template("login.html", warning=warning)
+            flash('Incorrect password. Try again')
+            return redirect('/login')
         
         # Remember which user has logged in
         session['user_id'] = rows[0]['id']
@@ -100,7 +100,7 @@ def login():
 def get_user_data():
     user = dict()
     pfp = db.execute('SELECT pfp FROM users WHERE id = ?', session['user_id'])[0]['pfp']
-    if not pfp == 'NULL':
+    if pfp == 'NULL':
         user['picture'] = None
     else:
         user['picture'] = UPLOAD_FOLDER + '/' + pfp
@@ -198,10 +198,6 @@ def settings():
     user = get_user_data()
     return render_template('settings.html', user=user['name'], picture=user['picture'])
 
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
 @app.route('/profile', methods = ["GET", "POST"])
 @login_required
 def profile():
@@ -235,24 +231,20 @@ def profile():
                 return redirect('/profile')
         
         # Now for the pfp part (first time doing this Scheiße)
-        if 'pfp' not in request.files:
-            flash('No file part')
-            return redirect('/profile')
-        
         pfp = request.files['pfp']
+        extension = os.path.splitext(pfp.filename)[1]
+        print(extension)
 
-        if pfp.filename == '':
-            flash('No selected file')
-            return redirect('/profile')
+        if pfp:
+            if extension not in ALLOWED_EXTENSIONS:
+                flash('The profile pic is not an image. Upload a JPG or PNG image')
+                return redirect('/profile')
+            else:
+                pfp.save(os.path.join(
+                    UPLOAD_FOLDER, secure_filename(pfp.filename)
+                ))
+                db.execute('UPDATE users SET pfp = ? WHERE id = ?', pfp.filename, session['user_id'])
         
-        if pfp and allowed_file(pfp.filename):
-            pfp_name = secure_filename(pfp.filename)
-            print(pfp_name)
-            pfp.save(os.path.join(app.config['UPLOAD_FOLDER'], pfp_name))
-
-            # Save to database
-            db.execute('UPDATE users SET pfp = ? WHERE id = ?', pfp_name, session['user_id'])
-
         # Finally, returning to the settings page
         return redirect('/settings')
 

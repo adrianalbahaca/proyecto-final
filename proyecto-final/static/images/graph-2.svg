@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="32"
+   viewBox="0 0 48 32"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (1:1.3.2+202404261509+091e20ef0f)"
+   sodipodi:docname="graph-2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="11.313708"
+     inkscape:cx="21.69934"
+     inkscape:cy="16.970563"
+     inkscape:window-width="1300"
+     inkscape:window-height="699"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path2" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded-7"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path2-5" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="ArrowWideRounded-79"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Wide, rounded arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         style="fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:round"
+         d="M 3,-3 0,0 3,3"
+         transform="rotate(180,0.125,0)"
+         sodipodi:nodetypes="ccc"
+         id="path2-2" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.66666667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin';fill:none;stroke:#ffe74c;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="6.6195683"
+       y="4.5701356"
+       id="text1"><tspan
+         id="tspan1"
+         sodipodi:role="line"
+         x="6.6195683"
+         y="4.5701356" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin';white-space:pre;inline-size:0;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="18.923424"
+       y="11.361894"
+       id="text2"
+       transform="translate(-14.256884,-5.0431703)"><tspan
+         id="tspan2"
+         x="18.923424"
+         y="11.361894"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold'">Dip</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="4.7872953"
+       y="10.650196"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="4.7872953"
+         y="10.650196">Squat</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="4.748673"
+       y="22.491318"
+       id="text3-5"><tspan
+         sodipodi:role="line"
+         id="tspan3-3"
+         x="4.748673"
+         y="22.491318">Deadlift</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="34.499538"
+       y="22.263985"
+       id="text3-5-9"><tspan
+         sodipodi:role="line"
+         id="tspan3-3-3"
+         x="34.499538"
+         y="22.263985"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light'"
+   id="tspan14">150</tspan>kg</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="35.307819"
+       y="26.874214"
+       id="text3-5-2"><tspan
+         sodipodi:role="line"
+         id="tspan3-3-6"
+         x="35.307819"
+         y="26.874214"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light'"
+   id="tspan16">75</tspan>kg</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="4.748673"
+       y="27.132347"
+       id="text3-9"><tspan
+         sodipodi:role="line"
+         id="tspan3-1"
+         x="4.748673"
+         y="27.132347">Clean &amp; Jerk</tspan></text>
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWideRounded)"
+       d="m 21.120541,5.4724574 h 4.685123"
+       id="path3"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#ArrowWideRounded-7)"
+       d="m 21.120541,9.7892632 h 4.685123"
+       id="path3-5"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.93333px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       x="32.885292"
+       y="8.7392635"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         x="32.885292"
+         y="8.7392635"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold'" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
+       x="31.470318"
+       y="4.5974574"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         x="31.470318"
+         y="4.5974574" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:600;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;stroke:none;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="31.527519"
+       y="4.1421924"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         x="31.527519"
+         y="4.1421924" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:600;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;stroke:none;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="35.094246"
+       y="6.2417917"
+       id="text7"><tspan
+         sodipodi:role="line"
+         id="tspan7"
+         x="35.094246"
+         y="6.2417917"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light'"
+   id="tspan8">+40</tspan>kg</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Medium';fill:#000000;stroke:none;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="34.411125"
+       y="10.558598"
+       id="text9"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         x="34.411125"
+         y="10.558598"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light'"
+           id="tspan11">+110</tspan><tspan
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold'"
+           id="tspan10">kg</tspan></tspan></text>
+    <path
+       style="fill:#000000;stroke:none;stroke-width:0.257935;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       d="M 0,16 H 48"
+       id="path11" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:0,0;stroke-dashoffset:0;stroke-opacity:1"
+       d="M -0.99480519,16 H 49"
+       id="path12" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:0.1, 0.2;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 0,16 H 48"
+       id="path13" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Light';fill:none;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="4.898273"
+       y="19.076345"
+       id="text13"><tspan
+         sodipodi:role="line"
+         id="tspan13"
+         x="4.898273"
+         y="19.076345" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       x="5.4396815"
+       y="20.124231"
+       id="text15"><tspan
+         sodipodi:role="line"
+         id="tspan15"
+         x="5.4396815"
+         y="20.124231" /></text>
+    <text
+       xml:space="preserve"
+       style="font-weight:600;font-size:2.66667px;font-family:'Libre Franklin';-inkscape-font-specification:'Libre Franklin Semi-Bold';fill:#000000;stroke:#000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10"
+       x="30.98288"
+       y="18.677217"
+       id="text12"><tspan
+         sodipodi:role="line"
+         id="tspan12"
+         x="30.98288"
+         y="18.677217" /></text>
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.200643;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;marker-end:url(#ArrowWideRounded)"
+       d="m 30.39445,22.702001 2.533094,-2.533095"
+       id="path17" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:0.200643;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:none;marker-end:url(#ArrowWideRounded-79)"
+       d="m 30.39445,27.366569 2.533094,-2.533095"
+       id="path17-2" />
+  </g>
+</svg>

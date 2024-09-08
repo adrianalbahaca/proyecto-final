@@ -6,37 +6,40 @@ Fortitude Log: Your workout companion
 
 {% block main %}
 <!-- First section of info -->
-<div class="box-row">
-    <div class="column">
-        <h2>Enhance your fortitude</h2>
-        <p>Ready to start your tracking?</p>
-        <a href="/register" class="register_button">Sign me up!</a>
-    </div>
-    <div class="column">
-        <!-- Image of main page -->
-         <img src="" alt="">
-    </div>
-</div>
-<div class="box-row">
-    <div class="column">
-        <div class="desc">
-            <h3>Create your beginning</h3>
-            <p>Register your PRs and goals, and have at hand how your lifts take off</p>
+<div class="container">
+    <div class="row g-3 border-bottom pb-3 align-items-center">
+        <div class="col-md">
+            <h1 class="fw-bold">Enhance your fortitude</h1>
+            <p class="fs-4">Ready to start your tracking?</p>
+            <a href="/register" class="btn btn-outline-dark">Sign me up!</a>
         </div>
-    </div>
-    <div class="column">
-        <img src="/static/images/grafica-1.svg" height="240" width="476" alt="">
-        <div class="desc">
-            <h3>See your progress</h3>
-            <p>Check at a glance how your lifts are improving, and evaluate each goal</p>
-        </div>
-    </div>
-    <div class="column">
-        <img src="" alt="">
-        <div class="desc">
-            <h3>Share your journey</h3>
-            <p>Save graphs of new PRs and share it with others across social media</p>
+        <div class="col-md">
+            <!-- Insert image with border and cool shit about this website -->
+            <img src="/static/images/example-page.svg" alt="Example page of the system" class="img-thumbnail example-page">
         </div>
     </div>
 </div>
+<div class="container my-3">
+    <div class="row row-cols-1 row-cols-md-2 mt-2 text-center">
+        <div class="col">
+            <div>
+                <img src="/static/images/graph-1.svg" alt="" class="graph img-thumbnail">
+                <div class="mt-2">
+                    <h3>See your progress</h3>
+                    <p>Use the graphs to visualize your PR progress and how much you've come</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div>
+                <img src="/static/images/graph-3.svg" alt="" class="graph img-thumbnail">
+                <div class="mt-2">
+                    <h3>Share your journey</h3>
+                    <p>Download the graphs and share them across social media with your friends</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -12,6 +12,9 @@
     <header class="container-fluid bg-light mb-2 py-3 px-5 border-bottom">
         <div class="d-flex flex-wrap align-items-center justify-content-start-md justify-content-between">
             {% if session['user_id'] %}
+            <a href="/">
+                <img src="/static/images/dibujo.svg" alt="" class="logo">
+            </a>
             {% else %}
             <!-- Logo that leads to the homepage -->
             <a href="/mainpage">
@@ -24,7 +27,14 @@
             {% endif %}
         </div>
     </header>
-    <main class="container">
+    {% if get_flashed_messages() %}
+    <header>
+        <div class="alert alert-warning text-center">
+            {{ get_flashed_messages() | join(" ") }}
+        </div>
+    </header>
+    {% endif %}
+    <main>
         {% block main%}{% endblock %}
     </main>
 </body>
