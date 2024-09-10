@@ -24,11 +24,61 @@
                 <input type="text" autocomplete="off" autofocus name="routine-desc" class="form-control">
             </div>
          </div>
-         <div class="row mb-2 d-flex flex-row align-items-center">
+         <div class="row mb-5 d-flex flex-row align-items-center">
             <button type="submit" class="btn btn-outline-success">Save routine</button>
          </div>
         <div>
-            
+            <!-- Here we go with this shit -->
+             <div id="routine">
+                <div class="row">
+                    <div class="col">
+                        <p class="btn btn-outline-info" onclick="addExercise(1)" id="add-ex">
+                            Add Exercise
+                        </p>
+                    </div>
+                </div>
+                <div id="ex-1">
+                    <div class="row">
+                        <!-- Exercise -->
+                        <div class="col">
+                            <h3>Exercise 1</h3>
+                        </div>
+                        <div class="col">
+                            <input type="text" autocomplete="off" autocapitalize="on" autofocus class="form-control" name="ex-name-1" placeholder="Exercise name">
+                        </div>
+                        <div class="col">
+                            <div class="btn-group" role="group">
+                                <p class="btn btn-outline-info" onclick="addSet(1,1)" id="add-set-ex-1">
+                                    Add set
+                                </p>
+                                <p class="btn btn-outline-info" onclick="removeSet(1,1)" id="remove-set-ex-1">
+                                    Remove set
+                                </p>
+                                <p class="btn btn-outline-warning" onclick="removeExercise(1)" id="remove-ex-1">
+                                    Delete exercise
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sets -->
+                    <div id="ex-1-set-1">
+                        <div class="row">
+                            <div class="col d-flex flex-row">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                                  </svg>
+                                <h3 class="ms-3">Set 1</h3>
+                            </div>
+                            <div class="col">
+                                <input type="number" autocomplete="off" autofocus placeholder="Weight in KG" class="form-control" name="ex-1-set-1-weight">
+                            </div>
+                            <div class="col">
+                                <input type="number" autocomplete="off" autofocus placeholder="Reps" class="form-control" name="ex-1-set-1-reps">
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
         </div>
     </form>
 </div>

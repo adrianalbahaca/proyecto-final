@@ -125,7 +125,7 @@ def homepage():
         i += 1
 
     # Get routines class="register_button"
-    routines = db.execute('SELECT routines.name, routines.description FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
+    routines = db.execute('SELECT routines.name, routines.description, routines.id FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
 
     # Get the user's name and picture
     user = get_user_data()

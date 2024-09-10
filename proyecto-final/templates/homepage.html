@@ -50,18 +50,20 @@
             </div>
         </div>
     {% else %}
-        {% for routine in routines %}
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 border-bottom pb-2">
             {% for routine in routines %}
             <div class="col border rounded">
-                <h3>{{ routine.name }}</h3>
-                <p>{{ routine.desc }}</p>
+                <h3 class="mt-2">{{ routine.name }}</h3>
+                <p class="mt-2">{{ routine.description }}</p>
+                <form action="/routine-check" method="post">
+                    <input type="hidden" value="{{ routine.id }}">
+                    <button class="btn btn-outline-info mb-2">Check routine</button>
+                </form>
             </div>
             {% endfor %}
-        </div>
-        {% endfor %}
-        <div class="col border rounded">
-            <img src="/static/images/plus-sign.svg" alt="" class="sign">
+            <div class="col border rounded d-flex justify-content-center align-items-center">
+                <img src="/static/images/plus-sign.svg" alt="" class="sign">
+            </div>
         </div>
     {% endif %}
 </section>
