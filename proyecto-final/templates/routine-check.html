@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+FL: routine
+{% endblock %}
+
+{% block main %}
+    <!-- Routine name and description -->
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 border-bottom">
+            <div class="col">
+                <h3>Routine name</h3>
+            </div>
+            <div class="col">
+                <p class="fs-5">{{routine[0].name}}</p>
+            </div>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 border-bottom">
+            <div class="col">
+                <h3>Routine description</h3>
+            </div>
+            <div class="col">
+                <p class="fs-5">{{routine[0].description}}</p>
+            </div>
+        </div>
+        <div>
+            <!-- Exercises -->
+        </div>
+    </div>
+    <!-- Exercises of the routine -->
+    <div class="container mt-3">
+        {% for i in range(1, len, 1)%}
+            <div class="row row-cols-1 row-cols-md-2">
+                <div class="col d-flex flex-row">
+                    <!-- Lil' arrow -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                    </svg>
+                    <h3>{{ routine[i].exercise }}</h3>
+                </div>
+                <div class="col d-flex flex-row justify-content-between">
+                    <p class="fs-5">{{ routine[i].reps }} Reps</p>
+                    <p class="fs-5">{{ routine[i].weights }} KG</p>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+    <!-- Buttons to delete the routine -->
+     <div class="container">
+        <form action="/routine-delete" method="post">
+            <div class="row">
+                <div class="col d-flex flex-row justify-content-center">
+                    <input type="hidden" value="{{ routine[0].id }}" name="routine-id">
+                    <button type="submit" class="btn btn-outline-danger">
+                        Delete this Routine
+                    </button>
+                </div>
+            </div>
+        </form>
+     </div>
+{% endblock %}

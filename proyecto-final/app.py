@@ -142,55 +142,80 @@ def routine():
         name = routine['routine-name']
         desc = routine['routine-desc']
 
-        # Create routine id in database
         db.execute('INSERT INTO ids (user_id) VALUES (?)', session['user_id'])
-
-        # Get routine id
         id = db.execute('SELECT routine_id FROM ids WHERE user_id = ?', session['user_id'])[0]['routine_id']
-        print(id)
-
-        # Save routine into database
         db.execute('INSERT INTO routines (id, name, description) VALUES (?, ?, ?)', id, name, desc)
-
-        # Now here comes the part where I need to think a lot...
-        # Scroll through the dict and save each part into the database, using a counter
-        # until it's the same to the length of the dict
-        ex_c = 1
         
-        # Scroll through the routine dict until there are no more exercises to show
+        # TODO: Create a loop that saves each set, reps and weight of each exercise
+        # Create a counter and scroll through the routine dict
+        c = 1
+
         while True:
-            # Try to register a new exercise
             try:
-                exercise = routine['ex-name-'+ str(ex_c)]
+                # Try to register a new exercise
+                exercise = routine['ex-name-' + str(c)]
             except:
-                # If you can't register another exercise, then break this loop
+                # If you can't do it, it means there are no more exercises to register
                 break
-            
-            set = 1
-            # If not, means that this exercise exists
-            for element in routine:
-                # Get reps and weight
+            # If all goes well, we look for each set
+            s = 1
+            for elements in routine:
+                # We're gonna use the elements in the 'routine' dict as a counter
                 try:
-                    reps = routine['ex-'+ str(ex_c) +'-set-'+ str(set) +'-reps']
-                    weight = routine['ex-'+ str(ex_c) +'-set-'+ str(set) +'-weight']
+                    reps = routine['ex-' + str(c) + '-set-' + str(s) + '-reps']
+                    weight = routine['ex-' + str(c) + '-set-' + str(s) + '-weight']
                 except:
-                    break   
-
-                # Register the variables into the database
+                    # If they didn't find the reps and weight of a set, there's no more
+                    break
+                
+                # If they found the info, register the info
                 db.execute('INSERT INTO routine_exercise (id, exercise, reps, weights) VALUES (?, ?, ?, ?)', id, exercise, reps, weight)
+                # Increase the set counter
+                s += 1
+            
+            # Increase the exercise counter
+            c += 1
 
-                # Increase set counter
-                set += 1
-
-            # Increase exercise counter
-            ex_c += 1
-
-        # Once the whole dict is registered, return to the homepage
         return redirect('/')
 
     else:
         user = get_user_data()
         return render_template('routine.html', user=user['name'], picture=user['picture'])
+    
+@app.route('/routine-check', methods=['GET', 'POST'])
+@login_required
+def routine_check():
+    if request.method == 'POST':
+        id = request.form.get('routine-id')
+
+        # Get the name and description of the routine from the database
+        routine_data = db.execute('SELECT id, name, description FROM routines WHERE id = ?', id)
+
+        # Get each exercise from the routine
+        values = db.execute('SELECT exercise, reps, weights FROM routine_exercise WHERE id = ?', id)
+        for value in values:
+            routine_data.append(value)
+        
+        l = len(routine_data)
+        
+        print(routine_data)
+        # Return template with the routine list
+        return render_template('routine-check.html', routine=routine_data, len=l)
+    
+@app.route('/routine-delete', methods = ['POST'])
+@login_required
+def routine_delete():
+    d = request.form.get('routine-id')
+
+    # Delete all the data on the database
+    db.execute('DELETE FROM routines WHERE id = ?', d)
+    db.execute('DELETE FROM routine_exercise WHERE id = ?', d)
+    db.execute('DELETE FROM ids WHERE routine_id = ?', d)
+
+    # Flash a message
+    flash('Routine successfully deleted')
+
+    return redirect('/')
     
 @app.route('/settings')
 @login_required
@@ -254,29 +279,17 @@ def prs():
     if request.method == 'GET':
         # Return the page to edit the profile picture
         user = get_user_data()
-        return render_template('prs.html', user=user['name'], picture=user['picture'])
+        prs = db.execute('SELECT exercise, weight, date FROM prs WHERE user_id = ?', session['user_id'])
+        return render_template('prs.html', user=user['name'], picture=user['picture'], prs=prs)
     else:
         # TODO: Manage the PRs and save them into the database
-        prs = request.form.to_dict()
+        exercise = request.form.get('pr-exercise')
+        weight = request.form.get('pr-weight')
+        date = request.form.get('pr-date')
 
-        # Create some kind of loop that saves each exercise's name and weight into the database
-        counter = 1
-        while True:
-            # Start by trying to register a new exercise
-            try:
-                pr_name = prs['ex-name-' + str(counter)]
-                pr_weight = prs['ex-weight-' + str(counter)]
-            except:
-                # If it fails, then there's nothing else to register, so break the loop
-                break
+        db.execute('INSERT INTO prs (user_id, exercise, weight, date) VALUES (?, ?, ?, ?)', session['user_id'], exercise, weight, date)
 
-            # Save the name and weight into the database
-            db.execute('INSERT INTO prs (user_id, exercise, weight) VALUES (?, ?, ?)', session['user_id'] , pr_name, pr_weight)
-
-            # Increase counter by 1
-            counter += 1
-        flash('PRs successfully registered')
-        return redirect('/settings')
+        return redirect('/prs')
     
 @app.route("/password", methods = ['GET', 'POST'])
 @login_required
