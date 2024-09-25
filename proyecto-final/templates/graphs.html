@@ -6,6 +6,43 @@ Graphs
 
 {% block main %}
     <div class="container">
-        
+        <canvas id="myChart"></canvas>
+        <a href="" id="download" >
+          <i class="fa fa-download"></i>
+        </a>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const ctx = document.getElementById('myChart');
+          
+            new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: {{ labels | safe }},
+                datasets: [{
+                  label: '# of Votes',
+                  data: {{ values | safe }},
+                  borderWidth: 2
+                }]
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true
+                  }
+                }
+              }
+            });
+            var image 
+          </script>
+          <script>
+            document.getElementById("download").addEventListener('click', function(){
+            /*Get image of canvas element*/
+            var url_base64jp = document.getElementById("myChart").toDataURL("image/jpg");
+            /*get download button (tag: <a></a>) */
+            var a =  document.getElementById("download");
+            /*insert chart image url to download button (tag: <a></a>) */
+            a.href = url_base64jp;
+          });
+          </script>
     </div>
 {% endblock %}

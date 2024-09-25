@@ -1,7 +1,7 @@
 {% extends 'layout.html'%}
 
 {% block title %}
-    FL: Homepage
+    Homepage
 {% endblock %}
 
 {% block main %}
@@ -18,15 +18,15 @@
             </a>
         </div>
         <div class="col bg-warning-subtle rounded py-2 ps-4 d-flex flex-column justify-content-center">
-            <h3>{{ user.name }}</h3>
-            {% if progress %}
-            {% for stuff in progress %}
+            <h3>{{ user.name }}, here is your highest PR</h3>
+            {% if prs %}
+            {% for pr in prs %}
                 <div class="row row-cols-2">
-                    <div>
-                        <h3>{{ stuff.exercise }}</h3>
+                    <div class="col">
+                        <h3>{{ pr.exercise }}</h3>
                     </div>
-                    <div>
-                        <p>{{ stuff.diff }}</p>
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <p>{{ pr.weight }}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -72,7 +72,7 @@
 <section class="container text-center">
     <!-- Find out a way to place graphs dinamically depending on the goals of the person -->
     <h3>Let's see your progress in the graphs</h3>
-     <a href="/graphs" class="btn btn-outline-info">Check graphs of my progress</a>
+     <a href="/choices" class="btn btn-outline-info">Check graphs of my progress</a>
 </section>
 
 {% endblock %}

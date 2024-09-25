@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Exercise to choose
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <h3 class="d-flex flex-row justify-content-center"> Exercise to see </h3>
+        <form action="/graphs" method="post" >
+            <select name="name" class="form-select mb-3">
+                <option selected>Select a workout to see the PRs and progress</option>
+                {% for pr in prs %}
+                <option value="{{ pr.exercise }}">{{ pr.exercise }}</option>
+                {% endfor %}
+            </select>
+            <div class="d-flex flex-row justify-content-center">
+                <button type="submit" class="btn btn-outline-info">See the progress</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

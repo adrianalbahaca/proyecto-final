@@ -100,7 +100,7 @@ def login():
 def get_user_data():
     user = dict()
     pfp = db.execute('SELECT pfp FROM users WHERE id = ?', session['user_id'])[0]['pfp']
-    if pfp == 'NULL':
+    if pfp == 'NULL' or pfp == None:
         user['picture'] = None
     else:
         user['picture'] = UPLOAD_FOLDER + '/' + pfp
@@ -112,17 +112,7 @@ def get_user_data():
 def homepage():
     # Get shit from the database
     # Compare the current weight with your goals
-    prs = db.execute("SELECT exercise, weight FROM prs WHERE user_id = ?", session['user_id'])
-    
-    goals = db.execute("SELECT exercise, weight FROM goals WHERE user_id = ?", session['user_id'])
-    
-    progress = []
-    # Assume that the prs recorded will always be in same quantity than the goals
-    i = 0
-    for goal in goals:
-        weight = prs[i]['weight']
-        progress.append({'exercise':goal['exercise'], 'diff': goal['weight'] - weight['weight']})
-        i += 1
+    prs = db.execute("SELECT DISTINCT exercise, weight FROM prs WHERE user_id = ? AND weight = (SELECT MAX (weight) FROM prs)", session['user_id'])
 
     # Get routines class="register_button"
     routines = db.execute('SELECT routines.name, routines.description, routines.id FROM routines INNER JOIN ids ON routines.id = ids.routine_id WHERE ids.user_id = ?', session['user_id'])
@@ -130,7 +120,7 @@ def homepage():
     # Get the user's name and picture
     user = get_user_data()
 
-    return render_template("homepage.html", progress=progress, routines=routines, picture=user['picture'], user=user['name'])
+    return render_template("homepage.html", prs=prs, routines=routines, picture=user['picture'], user=user['name'])
 
 @app.route("/routine", methods = ["GET", "POST"])
 @login_required
@@ -141,6 +131,10 @@ def routine():
         routine = request.form.to_dict()
         name = routine['routine-name']
         desc = routine['routine-desc']
+
+        if not name or not desc:
+            flash('Missing name or description')
+            return redirect('/routine')
 
         db.execute('INSERT INTO ids (user_id) VALUES (?)', session['user_id'])
         id = db.execute('SELECT routine_id FROM ids WHERE user_id = ?', session['user_id'])[0]['routine_id']
@@ -154,6 +148,10 @@ def routine():
             try:
                 # Try to register a new exercise
                 exercise = routine['ex-name-' + str(c)]
+                # If it's empty, let the user know
+                if not exercise:
+                    flash('Missing exercise name')
+                    return redirect('/routine')
             except:
                 # If you can't do it, it means there are no more exercises to register
                 break
@@ -168,6 +166,12 @@ def routine():
                     # If they didn't find the reps and weight of a set, there's no more
                     break
                 
+                # Check if they typed everything
+                if not reps or not weight:
+                    db.execute('DELETE FROM routine_exercise WHERE id = ?', id)
+                    db.execute('DELETE FROM routines WHERE id = ?', id)
+                    flash('Missing info of the exercise')
+                    return redirect('/routine')
                 # If they found the info, register the info
                 db.execute('INSERT INTO routine_exercise (id, exercise, reps, weights) VALUES (?, ?, ?, ?)', id, exercise, reps, weight)
                 # Increase the set counter
@@ -287,6 +291,10 @@ def prs():
         weight = request.form.get('pr-weight')
         date = request.form.get('pr-date')
 
+        if not exercise or not weight or not date:
+            flash('Info missing')
+            return redirect('/prs')
+
         db.execute('INSERT INTO prs (user_id, exercise, weight, date) VALUES (?, ?, ?, ?)', session['user_id'], exercise, weight, date)
 
         return redirect('/prs')
@@ -360,3 +368,32 @@ def delete():
         session.clear()
 
         return redirect('/register')
+    
+@app.route('/choices')
+@login_required
+def choices():
+    prs = db.execute('SELECT DISTINCT exercise FROM prs WHERE user_id = ?', session['user_id'])
+    return render_template('choices.html', prs=prs)
+    
+@app.route('/graphs', methods = ['POST'])
+@login_required
+def graphs():
+    exercise = request.form.get('name')
+    prs = db.execute('SELECT weight, date FROM prs WHERE user_id = ? AND exercise = ?', session['user_id'], exercise)
+
+    # TODO: Use this data and prepare it to show in a graph
+    data = []
+    for pr in prs:
+        data.append(
+            (pr['date'], pr['weight'])
+        )
+    
+    labels = []
+    values = []
+    for row in data:
+        labels.append(row[0])
+        values.append(row[1])
+
+    print(data)
+
+    return render_template('graphs.html', labels=labels, values=values, exercise=exercise)
